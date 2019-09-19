@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import '../../assets/start.css';
 
+const clickSoundPath = 'https://opengameart.org/sites/default/files/audio_preview/mouseclick.wav.mp3';
+
 class Start extends Component<any, any> {
     componentDidMount() {
         const menu = document.querySelector('.screen--start ul') as HTMLElement;
@@ -35,7 +37,8 @@ class Start extends Component<any, any> {
                     <li><button>how to play</button></li>
                     <li><button>credits</button></li>
                 </ul>
-                <audio id={"sound-select-btn"} src={'https://opengameart.org/sites/default/files/audio_preview/mouseclick.wav.mp3'} ></audio>
+                <p className={'copyright'}>&nbsp;&copy;2019 kal open art game</p>
+                <audio id={"sound-select-btn"} src={clickSoundPath} ></audio>
             </div>
         );
     }

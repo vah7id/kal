@@ -4,6 +4,7 @@ body, html {
   margin: 0;
   height: 100%;
   width: 100%;
+  background: #1F38EC;
   overflow: hidden;
   font-family: 'Press Start 2P', cursive;
 }
@@ -52,18 +53,19 @@ button {
 
 .screen--start ul li button.active::before {
   content: "> ";
-  color: blue;
+  color: rgb(255, 215, 0);
   animation: blink 1s steps(3, start) infinite;
 }
 
 .screen--start ul li button.active::after {
   content: " <";
-  color: blue;
+  color: rgb(255, 215, 0);
   animation: blink 1s steps(3, start) infinite;
 }
 
 .screen--start ul li button {
   background: transparent;
+  color: rgba(255,255,255,0.6);
   line-height: 1.5em;
   text-transform: uppercase;
   font-size: 2em;
@@ -71,11 +73,21 @@ button {
 }
 
 .screen--start ul li button.active {
-  color: blue;
+  color: white;
+}
+
+.copyright {
+    font-size: 0.8em;
+    letter-spacing: 0.5em;
+    color: rgb(255, 215, 0);
+    text-transform: Capitalize;
 }
 
 @media screen and (max-width: 768px) {
   .screen--start ul li button {
     font-size: 1em;
+  }
+  .copyright {
+    font-size: 0.6em;
   }
 }

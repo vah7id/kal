@@ -1,0 +1,63 @@
+body, html {
+  padding: 0;
+  background: white;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-family: 'Press Start 2P', cursive;
+}
+
+button {
+  font-family: 'Press Start 2P', cursive;
+}
+
+#kal-root {
+  width: 100%;
+  height: 100%;
+}
+
+.kal-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+  vertical-align: middle;
+}
+
+.screen--start {
+  text-align: center;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.screen--start ul {
+  margin: 0 auto;
+  width: 100%;
+  float: right;
+}
+
+.screen--start ul li {
+  width: 100%;
+  margin: 25px 0;
+}
+
+.screen--start ul li button {
+  background: transparent;
+  line-height: 1.5em;
+  text-transform: uppercase;
+  font-size: 2em;
+  border: none;
+}
+
+.screen--start ul li button:hover {
+  animation: blink 1s steps(4, start) infinite;
+}

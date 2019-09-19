@@ -47,7 +47,19 @@ button {
 
 .screen--start ul li {
   width: 100%;
-  margin: 25px 0;
+  margin: 15px 0;
+}
+
+.screen--start ul li button.active::before {
+  content: "> ";
+  color: blue;
+  animation: blink 1s steps(3, start) infinite;
+}
+
+.screen--start ul li button.active::after {
+  content: " <";
+  color: blue;
+  animation: blink 1s steps(3, start) infinite;
 }
 
 .screen--start ul li button {
@@ -58,6 +70,12 @@ button {
   border: none;
 }
 
-.screen--start ul li button:hover {
-  animation: blink 1s steps(4, start) infinite;
+.screen--start ul li button.active {
+  color: blue;
+}
+
+@media screen and (max-width: 768px) {
+  .screen--start ul li button {
+    font-size: 1em;
+  }
 }

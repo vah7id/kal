@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Button from '../../assets/elements/Button';
-import '../../assets/styles/start.css';
+import '../../assets/styles/_start.scss';
 import { push } from 'connected-react-router';
-const clickSoundPath = 'https://opengameart.org/sites/default/files/audio_preview/mouseclick.wav.mp3';
 
 class StartMenu extends Component<any, any> {
     componentDidMount() {
@@ -30,7 +29,6 @@ class StartMenu extends Component<any, any> {
                     <li><Button onPress={this.onClickMenu.bind(this)} id={'sm-guidance'} type={'link'} title={'how to play'} /></li>
                     <li><Button onPress={this.onClickMenu.bind(this)} id={'sm-credits'} type={'link'} title={'credits'} /></li>
                 </ul>
-                <audio id={"sound-select-btn"} src={clickSoundPath} ></audio>
             </>
         )
     }

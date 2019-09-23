@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../../assets/styles/start.css';
+import '../styles/_start.scss';
 import { TAP_SOUND_PATH } from '../../utils/global';
 
 interface Props {

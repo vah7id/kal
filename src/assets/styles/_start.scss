@@ -1,0 +1,51 @@
+@import 'basics/_variables.scss';
+
+.screen--start {
+  text-align: center;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  ul {
+    margin: 0 auto;
+    width: 100%;
+    float: right;
+
+    li {
+      width: 100%;
+      margin: 15px 0;
+
+      button {
+        background: transparent;
+        color: rgba(255,255,255,0.6);
+        line-height: 1.5em;
+        text-transform: uppercase;
+        font-size: 2em;
+        border: none;
+      }
+
+      button.active {
+        color: white;
+
+        &:before {
+          content: "> ";
+          color: $yellow;
+          animation: blink 1s steps(3, start) infinite;
+        }
+
+        &:after {
+          content: " <";
+          color: $yellow;
+          animation: blink 1s steps(3, start) infinite;
+        }
+      }
+    }
+  }
+}

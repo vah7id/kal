@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router';
 import { ConnectedRouter } from 'connected-react-router';
 import routes from './roadmap';
 import { History } from 'history';
-import './assets/styles/base.css';
+import './assets/styles/basics/_base.scss';
 
 interface Props {
     history: History;

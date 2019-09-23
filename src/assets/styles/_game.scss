@@ -57,21 +57,40 @@
 }
 
 .offline .runner-container {
-  height: 150px;
+  height: 180px;
   max-width: 600px;
   overflow: hidden;
   position: absolute;
-  top: 15px;
+  bottom: 115px;
   width: 44px;
 }
 
+.offline .ground {
+  background: url('../images/guide_jungle.png') repeat-x center center;
+  width: 100%;
+  position: absolute;
+  bottom: 86px;
+  height: 56px;
+  z-index: 100;
+}
+
+.offline .bottom-ground{
+  background: url('../images/stone.png') repeat;
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  height: calc(100px);
+  z-index: 100;
+}
+
 .offline .runner-canvas {
+  background: $bg-game;
   height: 150px;
   max-width: 600px;
   opacity: 1;
   overflow: hidden;
   position: absolute;
-  top: 0;
+  bottom: 0;
   z-index: 2;
 }
 
@@ -80,7 +99,7 @@
   height: 100vh;
   left: 0;
   position: absolute;
-  top: 0;
+  bottom: 100px;
   width: 100vw;
   z-index: 1;
 }
@@ -143,7 +162,7 @@
     margin-bottom: 0;
   }
   .offline .runner-container {
-    top: 10px;
+    bottom: 10px;
   }
 }
 

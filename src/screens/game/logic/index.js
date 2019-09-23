@@ -452,7 +452,6 @@ Runner.prototype = {
      * Canvas container width expands out to the full width.
      */
     playIntro: function () {
-        console.log('onj')
         if (!this.activated && !this.crashed) {
             this.playingIntro = true;
             this.tRex.playingIntro = true;
@@ -958,7 +957,13 @@ function createCanvas(container, width, height, opt_classname) {
     canvas.width = width;
     canvas.height = height;
     container.appendChild(canvas);
+    var ground = document.createElement('div');
+    ground.className = 'ground';
+    document.querySelector('.game-wrapper').appendChild(ground);
 
+    var bottomGround = document.createElement('div');
+    bottomGround.className = 'bottom-ground';
+    document.querySelector('.game-wrapper').appendChild(bottomGround);
     return canvas;
 }
 
@@ -2442,6 +2447,7 @@ HorizonLine.prototype = {
 
         this.xPos[line1] -= increment;
         this.xPos[line2] = this.xPos[line1] + this.dimensions.WIDTH;
+        this.yPos = 180;
 
         if (this.xPos[line1] <= -this.dimensions.WIDTH) {
             this.xPos[line1] += this.dimensions.WIDTH * 2;
@@ -2516,7 +2522,7 @@ function Horizon(canvas, spritePos, dimensions, gapCoefficient) {
 Horizon.config = {
     BG_CLOUD_SPEED: 0.2,
     BUMPY_THRESHOLD: .3,
-    CLOUD_FREQUENCY: .5,
+    CLOUD_FREQUENCY: 1,
     HORIZON_HEIGHT: 16,
     MAX_CLOUDS: 6
 };

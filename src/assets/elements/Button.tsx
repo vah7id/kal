@@ -13,18 +13,20 @@ interface Props {
 
 class Button extends Component<Props, any> {
     componentDidMount() {
-        this.loadAudio();
+        this.loadSound();
         const el = document.getElementById(this.props.id) as HTMLButtonElement;
         el.addEventListener('focus', this.focus.bind(this));
         el.addEventListener('click', this.press.bind(this));
     }
-    loadAudio() {
-        const audioEl = document.getElementById('sound-btn-press');
-        if(!audioEl) {
-            document.body.innerHTML += `<audio id="sound-btn-press" src="${this.props.audio || TAP_SOUND_PATH}"></audio>`;
+    loadSound() {
+        if(!document.getElementById('sound-btn-press')) {
+            const sound = document.createElement('audio');
+            sound.id = 'sound-btn-press';
+            sound.src = this.props.audio || TAP_SOUND_PATH;
+            document.body.appendChild(sound);
         }
     }
-    sound() {
+    playSound() {
         const audio = document.getElementById("sound-btn-press") as HTMLAudioElement;
         audio.play();
     }
@@ -32,7 +34,7 @@ class Button extends Component<Props, any> {
         e.preventDefault();
         this.blurAllMenuButtons();
         e.currentTarget.classList.add('active');
-        this.sound();
+        this.playSound();
     }
     press(e: any) {
         this.focus(e);

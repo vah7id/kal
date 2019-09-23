@@ -1,10 +1,5 @@
-import { fork, put, takeLatest } from 'redux-saga/effects';
-import { actions } from '../ducks/game';
+import { takeLatest } from 'redux-saga/effects';
 import SimplePeer from 'simple-peer';
-
-export function* basicSideEffects() {
-  yield put(actions.kickoff())
-}
 
 export function test() {
     let peer1 = new SimplePeer({ initiator: true })
@@ -32,6 +27,5 @@ export function test() {
 }
 
 export function* base() {
-  yield fork(basicSideEffects);
   yield takeLatest('KICK_OFF', test);
 }

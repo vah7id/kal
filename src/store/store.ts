@@ -13,12 +13,14 @@ export const configureStore = (history: any) => {
     {
       key: 'root',
       version: 1,
-      blacklist: [],
+      blacklist: ['router', 'game'],
       storage,
     },
     rootReducer
   );
-  const composeEnhancers = compose;
+  const composeEnhancers = (window as { [key: string]: any })["__REDUX_DEVTOOLS_EXTENSION_COMPOSE__"] &&
+      (window as { [key: string]: any })["__REDUX_DEVTOOLS_EXTENSION_COMPOSE__"]({ trace: true, traceLimit: 100 }) ||
+      compose;
   const store = createStore(
     persistedReducer,
     composeEnhancers(applyMiddleware(sagaMiddleware, routerMiddleware(history)))

@@ -7,7 +7,7 @@ class StartScreen extends Component<any, any> {
         return (
             <div className="screen--start">
                 <StartMenu />
-                <p className={'copyright'}>&nbsp;&copy;2019 kal open art game</p>
+                <p className={'copyright'}>&nbsp;&copy;2019 kal open game art</p>
             </div>
         );
     }

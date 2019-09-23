@@ -38,7 +38,9 @@ class Button extends Component<Props, any> {
     }
     press(e: any) {
         this.focus(e);
-        this.props.onPress(e);
+        if(this.props.onPress) {
+            this.props.onPress(e);
+        }
     }
     blurAllMenuButtons() {
         const buttons: any = document.querySelectorAll('.screen--start ul li button');

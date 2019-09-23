@@ -57,7 +57,6 @@ function Runner(outerContainerId, opt_config) {
     // Images.
     this.images = {};
     this.imagesLoaded = 0;
-
     if (this.isDisabled()) {
         this.setupDisabledRunner();
     } else {
@@ -416,7 +415,7 @@ Runner.prototype = {
             boxStyles.paddingLeft.length - 2));
 
         //this.dimensions.WIDTH = this.outerContainerEl.offsetWidth - padding * 2;
-        this.dimensions.WIDTH = this.outerContainerEl.offsetWidth - padding * 2;
+        this.dimensions.WIDTH = this.outerContainerEl.offsetWidth    - padding * 2;
 
         // Redraw the elements back onto the canvas.
         if (this.canvas) {
@@ -453,6 +452,7 @@ Runner.prototype = {
      * Canvas container width expands out to the full width.
      */
     playIntro: function () {
+        console.log('onj')
         if (!this.activated && !this.crashed) {
             this.playingIntro = true;
             this.tRex.playingIntro = true;
@@ -659,6 +659,7 @@ Runner.prototype = {
      * @param {Event} e
      */
     onKeyDown: function (e) {
+        console.log(e.keyCode)
         // Prevent native page scrolling whilst tapping on mobile.
         if (IS_MOBILE && this.playing) {
             e.preventDefault();
@@ -666,7 +667,8 @@ Runner.prototype = {
 
         if (e.target != this.detailsButton) {
             if (!this.crashed && (Runner.keycodes.JUMP[e.keyCode] ||
-                e.type == Runner.events.TOUCHSTART)) {
+                e.type === Runner.events.TOUCHSTART || e.keyCode === 13)) {
+                document.body.classList.add('bg-game');
                 if (!this.playing) {
                     this.loadSounds();
                     this.playing = true;

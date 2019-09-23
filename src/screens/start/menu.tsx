@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Button from '../../assets/elements/Button';
 import '../../assets/styles/_start.scss';
 import { push } from 'connected-react-router';
 
-class StartMenu extends Component<any, any> {
+interface State {
+    status: string;
+}
+
+interface Props {
+    navigate: any;
+}
+
+class StartMenu extends Component<Props, State> {
     componentDidMount() {
         this.adjustMenuSize();
         this.initialMenu();
@@ -13,25 +22,37 @@ class StartMenu extends Component<any, any> {
         menu.style.maxWidth = window.screen.width + 'px';
     }
     initialMenu() {
-        const StartBtn = document.getElementById('sm-single-player') as HTMLButtonElement;
+        const StartBtn = document.getElementById('single-player') as HTMLButtonElement;
         StartBtn.focus();
     }
     onClickMenu(e: any) {
-        push(e.currentTarget.getAttribute('id'));
+        this.props.navigate(e.currentTarget.getAttribute('id'));
     }
     render() {
         return (
             <>
                 <ul>
-                    <li><Button onPress={this.onClickMenu.bind(this)} id={'sm-single-player'} type={'link'} title={'single player'} /></li>
-                    <li><Button onPress={this.onClickMenu.bind(this)} id={'sm-multi-player'} type={'link'} title={'multi player'} /></li>
-                    <li><Button onPress={this.onClickMenu.bind(this)} id={'sm-settings'} type={'link'} title={'settings'} /></li>
-                    <li><Button onPress={this.onClickMenu.bind(this)} id={'sm-guidance'} type={'link'} title={'how to play'} /></li>
-                    <li><Button onPress={this.onClickMenu.bind(this)} id={'sm-credits'} type={'link'} title={'credits'} /></li>
+                    <li><Button onPress={this.onClickMenu.bind(this)} id={'single-player'} type={'link'} title={'single player'} /></li>
+                    <li><Button onPress={this.onClickMenu.bind(this)} id={'multi-player'} type={'link'} title={'multi player'} /></li>
+                    <li><Button onPress={this.onClickMenu.bind(this)} id={'settings'} type={'link'} title={'settings'} /></li>
+                    <li><Button onPress={this.onClickMenu.bind(this)} id={'guidance'} type={'link'} title={'how to play'} /></li>
+                    <li><Button onPress={this.onClickMenu.bind(this)} id={'credits'} type={'link'} title={'credits'} /></li>
                 </ul>
             </>
         )
     }
 }
 
-export default StartMenu;
+
+const mapStateToProps = (state: any) => ({
+    status: state.game.status
+});
+
+const mapDispatchToProps = (dispatch: any) => ({
+    navigate: (route: string) => dispatch(push(route))
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(StartMenu);

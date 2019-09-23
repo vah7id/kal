@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../../assets/styles/_start.scss';
 
-class Start extends Component<any, any> {
+class SinglePlayerScreen extends Component<any, any> {
     render() {
         return (
             <div className="screen--start">
@@ -11,4 +11,4 @@ class Start extends Component<any, any> {
     }
 }
 
-export default Start;
+export default SinglePlayerScreen;

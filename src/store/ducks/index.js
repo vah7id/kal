@@ -5,5 +5,5 @@ import { gameReducer } from './game';
 export default history =>
   combineReducers({
     router: connectRouter(history),
-    gameReducer,
+    game: gameReducer,
   });

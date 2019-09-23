@@ -9,7 +9,7 @@ import { createBrowserHistory } from 'history';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-const history: any = createBrowserHistory({ basename: 'http://localhost:3000' });
+const history: any = createBrowserHistory({ basename: '/' });
 export const { store, persistor } = configureStore(history);
 
 export const RootDOM = () => (

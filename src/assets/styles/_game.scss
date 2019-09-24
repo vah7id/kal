@@ -19,6 +19,23 @@
   display: none;
 }
 
+#record-live {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: rgba(255,255,255,0.8);
+}
+
+#player-username {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  max-width: 50%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: rgba(255,255,255,0.6);
+}
+
 #kick-off-start-msg {
   background: $bg-game;
   text-align: center;

@@ -15,6 +15,8 @@ class SinglePlayerScreen extends Component<any, any> {
             <>
                 <KickOffScreen />
                 <div id="main-frame-error" className="game-wrapper">
+                    <span id={'record-live'}></span>
+                    <span id={'player-username'}>Anonymous</span>
                     <div id="main-content">
                         <div className={"icon icon-offline"}></div>
                     </div>

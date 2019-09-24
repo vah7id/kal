@@ -787,7 +787,7 @@ Runner.prototype = {
         // Update the high score.
         if (this.distanceRan > this.highestScore) {
             this.highestScore = Math.ceil(this.distanceRan);
-            this.distanceMeter.setHighScore(this.highestScore);
+            //TODO: this.distanceMeter.setHighScore(this.highestScore);
         }
 
         // Reset the time clock.
@@ -1929,7 +1929,6 @@ DistanceMeter.prototype = {
             this.defaultString += '0';
             maxDistanceStr += '9';
         }
-
         this.maxScore = parseInt(maxDistanceStr);
     },
 
@@ -1970,12 +1969,12 @@ DistanceMeter.prototype = {
         sourceY += this.spritePos.y;
 
         this.canvasCtx.save();
-
         if (opt_highScore) {
             // Left of the current score.
             var highScoreX = this.x - (this.maxScoreUnits * 2) *
                 DistanceMeter.dimensions.WIDTH;
             this.canvasCtx.translate(highScoreX, this.y);
+
         } else {
             this.canvasCtx.translate(this.x, this.y);
         }
@@ -2007,9 +2006,9 @@ DistanceMeter.prototype = {
     update: function (deltaTime, distance) {
         var paint = true;
         var playSound = false;
-
         if (!this.acheivement) {
             distance = this.getActualDistance(distance);
+            document.getElementById('record-live').innerHTML = distance;
             // Score has gone beyond the initial digit count.
             if (distance > this.maxScore && this.maxScoreUnits ==
                 this.config.MAX_DISTANCE_UNITS) {
@@ -2055,13 +2054,13 @@ DistanceMeter.prototype = {
         }
 
         // Draw the digits if not flashing.
-        if (paint) {
+        /*if (paint) {
             for (var i = this.digits.length - 1; i >= 0; i--) {
                 this.draw(i, parseInt(this.digits[i]));
             }
         }
 
-        this.drawHighScore();
+        this.drawHighScore();*/
         return playSound;
     },
 
@@ -2086,7 +2085,6 @@ DistanceMeter.prototype = {
         distance = this.getActualDistance(distance);
         var highScoreStr = (this.defaultString +
             distance).substr(-this.maxScoreUnits);
-
         this.highScore = ['10', '11', ''].concat(highScoreStr.split(''));
     },
 

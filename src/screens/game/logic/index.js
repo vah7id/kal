@@ -239,7 +239,6 @@ Runner.prototype = {
         this.containerEl.className = Runner.classes.SNACKBAR;
         this.containerEl.textContent = 'disabled';// loadTimeData.getValue('disabledEasterEgg');
         this.outerContainerEl.appendChild(this.containerEl);
-
         // Show notification when the activation key is pressed.
         document.addEventListener(Runner.events.KEYDOWN, function (e) {
             if (Runner.keycodes.JUMP[e.keyCode]) {
@@ -377,6 +376,9 @@ Runner.prototype = {
 
         this.startListening();
         this.update();
+
+        document.querySelector('.runner-container').style.width = window.screen.width+'px';
+        document.querySelector('.runner-container').style.opacity = 0;
 
         window.addEventListener(Runner.events.RESIZE,
             this.debounceResize.bind(this));
@@ -1761,6 +1763,7 @@ Trex.prototype = {
         if (this.reachedMinHeight &&
             this.jumpVelocity < this.config.DROP_VELOCITY) {
             this.jumpVelocity = this.config.DROP_VELOCITY;
+
         }
     },
 
@@ -1772,7 +1775,7 @@ Trex.prototype = {
     updateJump: function (deltaTime, speed) {
         var msPerFrame = Trex.animFrames[this.status].msPerFrame;
         var framesElapsed = deltaTime / msPerFrame;
-
+        var runner = document.querySelector('.runner-container');
         // Speed drop makes Trex fall faster.
         if (this.speedDrop) {
             this.yPos += Math.round(this.jumpVelocity *
@@ -1791,6 +1794,12 @@ Trex.prototype = {
         // Reached max height
         if (this.yPos < this.config.MAX_JUMP_HEIGHT || this.speedDrop) {
             this.endJump();
+            setTimeout(() => {
+                console.log(runner.style.opacity)
+                if(runner && runner.style.opacity !== 1) {
+                    runner.style.opacity = 1
+                }
+            }, 600);
         }
 
         // Back down at ground level. Jump completed.
@@ -2008,7 +2017,9 @@ DistanceMeter.prototype = {
         var playSound = false;
         if (!this.acheivement) {
             distance = this.getActualDistance(distance);
-            document.getElementById('record-live').innerHTML = distance;
+            if(document.getElementById('record-live')) {
+                document.getElementById('record-live').innerHTML = distance;
+            }
             // Score has gone beyond the initial digit count.
             if (distance > this.maxScore && this.maxScoreUnits ==
                 this.config.MAX_DISTANCE_UNITS) {

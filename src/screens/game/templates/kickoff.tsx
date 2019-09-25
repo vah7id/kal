@@ -11,6 +11,7 @@ var IS_MOBILE = /Android/.test(window.navigator.userAgent) || IS_IOS;
 
 class KickOffScreen extends Component<KickOffProps, any> {
     componentDidMount() {
+        document.body.classList.add('bg-game');
         if(this.props.status === GAME_STATUS.kickoff) {
             const executeKickoff = () => this.kickoff();
             document.onkeydown = function (e) {
@@ -45,7 +46,7 @@ class KickOffScreen extends Component<KickOffProps, any> {
         return (
             <>
                 <div id={'kick-off-start-msg'}>
-                    <Button onPress={() => this.kickoff()} classList={'btn-dark active'} type={'link'} title={'Press Space to start'} id={'sp-start-btn'} />
+                    <Button onPress={() => this.kickoff()} classList={'btn-light active'} type={'link'} title={'Press Space to start'} id={'sp-start-btn'} />
                 </div>
             </>
         );

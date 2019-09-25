@@ -31,9 +31,28 @@
   left: 15px;
   top: 15px;
   max-width: 50%;
+  min-width: 150px;
+  background: #ddd;
+  width: auto;
+}
+
+#player-username span {
+  position: absolute;
+  left: 5px;
+  right: 2px;
+  font-size: $font-sm;
   text-overflow: ellipsis;
+  text-transform: uppercase;
   overflow: hidden;
   color: rgba(255,255,255,0.6);
+}
+
+#player-username #health {
+  width: 100%;
+  padding: 2px 5px 0 0;
+  background: green;
+  height: 20px;
+  float: left;
 }
 
 #kick-off-start-msg {

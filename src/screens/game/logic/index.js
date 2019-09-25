@@ -25,6 +25,8 @@ function Runner(outerContainerId, opt_config) {
 
     this.tRex = null;
 
+    this.health = 100;
+
     this.distanceMeter = null;
     this.distanceRan = 0;
 
@@ -515,6 +517,21 @@ Runner.prototype = {
             this.dimensions.HEIGHT);
     },
 
+    updateHealth() {
+        const healthEl = document.getElementById('health');
+        this.health -= 1;
+        healthEl.style.width = this.health + '%';
+        if(this.health < 80) {
+            healthEl.style.background = 'greenyellow';
+        }
+        if(this.health < 60) {
+            healthEl.style.background = 'rgb(255, 215, 0)';
+        }
+        if(this.health < 30) {
+            healthEl.style.background = 'red';
+        }
+    },
+
     /**
      * Update the game frame and schedules the next one.
      */
@@ -560,7 +577,12 @@ Runner.prototype = {
                     this.currentSpeed += this.config.ACCELERATION;
                 }
             } else {
-                this.gameOver();
+                if(this.health <= 0) {
+                    this.gameOver();
+                }
+                this.playSound(this.soundFx.HIT);
+                vibrate(200);
+                this.updateHealth();
             }
 
             var playAchievementSound = this.distanceMeter.update(deltaTime,
@@ -770,6 +792,8 @@ Runner.prototype = {
     gameOver: function () {
         this.playSound(this.soundFx.HIT);
         vibrate(200);
+        // document.getElementById('health').style.width = '100%';
+        document.querySelector('#player-username span').style.textDecorationLine = 'line-through'
 
         this.stop();
         this.crashed = true;

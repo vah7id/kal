@@ -6,6 +6,9 @@ import { KickOffProps } from '../interfaces';
 import {actions} from "../reducer";
 import Button from '../../../assets/elements/Button';
 
+var IS_IOS = /iPad|iPhone|iPod/.test(window.navigator.platform);
+var IS_MOBILE = /Android/.test(window.navigator.userAgent) || IS_IOS;
+
 class KickOffScreen extends Component<KickOffProps, any> {
     componentDidMount() {
         if(this.props.status === GAME_STATUS.kickoff) {
@@ -13,6 +16,12 @@ class KickOffScreen extends Component<KickOffProps, any> {
             document.onkeydown = function (e) {
                 e = e || window.event;
                 if (e.keyCode === 32 || e.keyCode === 13) {
+                    executeKickoff();
+                }
+            }
+            if(IS_MOBILE) {
+                const box = document.getElementById("kick-off-start-msg") as HTMLElement;
+                box.ontouchstart = function(e) {
                     executeKickoff();
                 }
             }
@@ -36,7 +45,7 @@ class KickOffScreen extends Component<KickOffProps, any> {
         return (
             <>
                 <div id={'kick-off-start-msg'}>
-                    <Button classList={'btn-dark active'} type={'link'} title={'Press Space to start'} id={'sp-start-btn'} />
+                    <Button onPress={() => this.kickoff()} classList={'btn-dark active'} type={'link'} title={'Press Space to start'} id={'sp-start-btn'} />
                 </div>
             </>
         );

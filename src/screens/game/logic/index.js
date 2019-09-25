@@ -306,8 +306,6 @@ Runner.prototype = {
                 document.getElementById(this.config.RESOURCE_TEMPLATE_ID).content;
 
             for (var sound in Runner.sounds) {
-                console.log(Runner.sounds[sound])
-
                 var soundSrc = document.getElementById(Runner.sounds[sound]).src;
                 soundSrc = soundSrc.substr(soundSrc.indexOf(',') + 1);
                 var buffer = decodeBase64ToArrayBuffer(soundSrc);
@@ -452,6 +450,10 @@ Runner.prototype = {
      * Canvas container width expands out to the full width.
      */
     playIntro: function () {
+        const box = document.getElementById("kick-off-start-msg");
+        if(box) {
+            box.style.display = 'none';
+        }
         if (!this.activated && !this.crashed) {
             this.playingIntro = true;
             this.tRex.playingIntro = true;
@@ -658,12 +660,10 @@ Runner.prototype = {
      * @param {Event} e
      */
     onKeyDown: function (e) {
-        console.log(e.keyCode)
         // Prevent native page scrolling whilst tapping on mobile.
-        if (IS_MOBILE && this.playing) {
+        if (this.playing) {
             e.preventDefault();
         }
-
         if (e.target != this.detailsButton) {
             if (!this.crashed && (Runner.keycodes.JUMP[e.keyCode] ||
                 e.type === Runner.events.TOUCHSTART || e.keyCode === 13)) {

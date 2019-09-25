@@ -37,7 +37,11 @@
 }
 
 #kick-off-start-msg {
-  background: $bg-game;
+  background: transparent;
+  position: fixed;
+  top:0;
+  right: 0;
+  height: 100%;
   text-align: center;
   width: 100%;
   padding: 0;
@@ -57,9 +61,7 @@
 
 .offline .game-wrapper {
   background: $bg-game;
-  visibility: hidden;
-  position: absolute;
-  z-index: 2;
+  visibility: visible;
   color: #2b2b2b;
   font-size: 1em;
   line-height: 1.55;
@@ -101,7 +103,6 @@
 }
 
 .offline .runner-canvas {
-  background: $bg-game;
   height: 150px;
   max-width: 600px;
   opacity: 1;

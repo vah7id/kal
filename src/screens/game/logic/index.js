@@ -157,6 +157,7 @@ Runner.spriteDefinition = {
         CACTUS_LARGE: { x: 332, y: 2 },
         CACTUS_SMALL: { x: 228, y: 2 },
         CLOUD: { x: 86, y: 2 },
+        MUSHROOM: { x: 86, y: 54 },
         HORIZON: { x: 2, y: 54 },
         MOON: { x: 484, y: 2 },
         PTERODACTYL: { x: 134, y: 2 },
@@ -169,6 +170,7 @@ Runner.spriteDefinition = {
         CACTUS_LARGE: { x: 652, y: 2 },
         CACTUS_SMALL: { x: 446, y: 2 },
         CLOUD: { x: 166, y: 2 },
+        MUSHROOM: { x: 166, y: 104 },
         HORIZON: { x: 2, y: 104 },
         MOON: { x: 954, y: 2 },
         PTERODACTYL: { x: 260, y: 2 },
@@ -282,9 +284,11 @@ Runner.prototype = {
     loadImages: function () {
         if (IS_HIDPI) {
             Runner.imageSprite = document.getElementById('offline-resources-2x');
+            Runner.shroomSprite = document.getElementById('shroom-1x');
             this.spriteDef = Runner.spriteDefinition.HDPI;
         } else {
             Runner.imageSprite = document.getElementById('offline-resources-1x');
+            Runner.shroomSprite = document.getElementById('shroom-1x');
             this.spriteDef = Runner.spriteDefinition.LDPI;
         }
 
@@ -2156,6 +2160,19 @@ function Cloud(canvas, spritePos, containerWidth) {
     this.init();
 };
 
+function Mushroom(canvas, spritePos, containerWidth) {
+    this.canvas = canvas;
+    this.canvasCtx = this.canvas.getContext('2d');
+    this.spritePos = spritePos;
+    this.containerWidth = containerWidth;
+    this.xPos = containerWidth;
+    this.yPos = 102;
+    this.remove = false;
+    this.cloudGap = getRandomNum(Cloud.config.MIN_CLOUD_GAP*2,
+        Cloud.config.MAX_CLOUD_GAP*2);
+
+    this.init();
+};
 
 /**
  * Cloud object config.
@@ -2169,6 +2186,15 @@ Cloud.config = {
     MIN_SKY_LEVEL: 71,
     WIDTH: 46
 };
+
+Mushroom.config = {
+    HEIGHT: 32,
+    MAX_SHROOM_GAP: 400,
+    MAX_SKY_LEVEL: 30,
+    MIN_SHROOM_GAP: 100,
+    MIN_SKY_LEVEL: 71,
+    WIDTH: 32
+}
 
 
 Cloud.prototype = {
@@ -2225,6 +2251,64 @@ Cloud.prototype = {
      */
     isVisible: function () {
         return this.xPos + Cloud.config.WIDTH > 0;
+    }
+};
+
+
+Mushroom.prototype = {
+    /**
+     * Initialise the cloud. Sets the Cloud height.
+     */
+    init: function () {
+        // this.yPos = getRandomNum(Cloud.config.MAX_SKY_LEVEL,
+        //    Cloud.config.MIN_SKY_LEVEL);
+        this.draw();
+    },
+
+    /**
+     * Draw the cloud.
+     */
+    draw: function () {
+        this.canvasCtx.save();
+        var sourceWidth = Mushroom.config.WIDTH;
+        var sourceHeight = Mushroom.config.HEIGHT;
+
+        if (IS_HIDPI) {
+            sourceWidth = sourceWidth * 2;
+            sourceHeight = sourceHeight * 2;
+        }
+
+        this.canvasCtx.drawImage(Runner.shroomSprite, 0,
+            0,
+            32, 32,
+            this.xPos, this.yPos,
+            Mushroom.config.WIDTH, Mushroom.config.HEIGHT);
+
+        this.canvasCtx.restore();
+    },
+
+    /**
+     * Update the cloud position.
+     * @param {number} speed
+     */
+    update: function (speed) {
+        if (!this.remove) {
+            this.xPos -= Math.ceil(speed);
+            this.draw();
+
+            // Mark as removeable if no longer in the canvas.
+            if (!this.isVisible()) {
+                this.remove = true;
+            }
+        }
+    },
+
+    /**
+     * Check if the cloud is visible on the stage.
+     * @return {boolean}
+     */
+    isVisible: function () {
+        return this.xPos + Mushroom.config.WIDTH > 0;
     }
 };
 
@@ -2540,6 +2624,7 @@ function Horizon(canvas, spritePos, dimensions, gapCoefficient) {
 
     // Cloud
     this.clouds = [];
+    this.shrooms = [];
     this.cloudSpeed = this.config.BG_CLOUD_SPEED;
 
     // Horizon
@@ -2567,6 +2652,7 @@ Horizon.prototype = {
      */
     init: function () {
         this.addCloud();
+        this.addShroom();
         this.horizonLine = new HorizonLine(this.canvas, this.spritePos.HORIZON);
         this.nightMode = new NightMode(this.canvas, this.spritePos.MOON,
             this.dimensions.WIDTH);
@@ -2585,6 +2671,7 @@ Horizon.prototype = {
         this.horizonLine.update(deltaTime, currentSpeed);
         this.nightMode.update(showNightMode);
         this.updateClouds(deltaTime, currentSpeed);
+        this.updateShrooms(deltaTime, currentSpeed);
 
         if (updateObstacles) {
             this.updateObstacles(deltaTime, currentSpeed);
@@ -2620,6 +2707,33 @@ Horizon.prototype = {
             });
         } else {
             this.addCloud();
+        }
+    },
+
+    updateShrooms: function (deltaTime, speed) {
+        var cloudSpeed = this.cloudSpeed / 1000 * deltaTime * speed;
+        var shroomsCount = this.shrooms.length;
+
+        if (shroomsCount) {
+            for (var i = shroomsCount - 1; i >= 0; i--) {
+                this.shrooms[i].update(cloudSpeed);
+            }
+
+            var lastShroom = this.shrooms[shroomsCount - 1];
+
+            // Check for adding a new cloud.
+            if (shroomsCount < this.config.MAX_CLOUDS &&
+                (this.dimensions.WIDTH - lastShroom.xPos) > lastShroom.cloudGap &&
+                this.cloudFrequency > Math.random()) {
+                this.addShroom();
+            }
+
+            // Remove expired clouds.
+            this.shrooms = this.shrooms.filter(function (obj) {
+                return !obj.remove;
+            });
+        } else {
+            this.addShroom();
         }
     },
 
@@ -2731,6 +2845,10 @@ Horizon.prototype = {
      */
     addCloud: function () {
         this.clouds.push(new Cloud(this.canvas, this.spritePos.CLOUD,
+            this.dimensions.WIDTH));
+    },
+    addShroom: function () {
+        this.shrooms.push(new Mushroom(this.canvas, this.spritePos.MUSHROOM,
             this.dimensions.WIDTH));
     }
 };

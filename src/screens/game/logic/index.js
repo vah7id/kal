@@ -520,7 +520,12 @@ Runner.prototype = {
         this.canvasCtx.clearRect(0, 0, this.dimensions.WIDTH,
             this.dimensions.HEIGHT);
     },
-
+    resetHealth() {
+        const healthEl = document.getElementById('health');
+        healthEl.style.background = 'green';
+        this.health = 100;
+        healthEl.style.width = this.health + '%';
+    },
     updateHealth() {
         const healthEl = document.getElementById('health');
         this.health -= 1;
@@ -796,8 +801,7 @@ Runner.prototype = {
     gameOver: function () {
         this.playSound(this.soundFx.HIT);
         vibrate(200);
-        // document.getElementById('health').style.width = '100%';
-        document.querySelector('#player-username span').style.textDecorationLine = 'line-through'
+        document.querySelector('#player-username span').style.textDecorationLine = 'line-through';
 
         this.stop();
         this.crashed = true;
@@ -858,6 +862,9 @@ Runner.prototype = {
             this.playSound(this.soundFx.BUTTON_PRESS);
             this.invert(true);
             this.update();
+            this.health = 100;
+            document.querySelector('#player-username span').style.textDecorationLine = 'unset';
+            this.resetHealth();
         }
     },
 
@@ -2652,7 +2659,7 @@ Horizon.prototype = {
      */
     init: function () {
         this.addCloud();
-        this.addShroom();
+        // this.addShroom();
         this.horizonLine = new HorizonLine(this.canvas, this.spritePos.HORIZON);
         this.nightMode = new NightMode(this.canvas, this.spritePos.MOON,
             this.dimensions.WIDTH);
@@ -2725,7 +2732,7 @@ Horizon.prototype = {
             if (shroomsCount < this.config.MAX_CLOUDS &&
                 (this.dimensions.WIDTH - lastShroom.xPos) > lastShroom.cloudGap &&
                 this.cloudFrequency > Math.random()) {
-                this.addShroom();
+                // this.addShroom();
             }
 
             // Remove expired clouds.
@@ -2733,7 +2740,7 @@ Horizon.prototype = {
                 return !obj.remove;
             });
         } else {
-            this.addShroom();
+            // this.addShroom();
         }
     },
 

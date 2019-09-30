@@ -522,22 +522,26 @@ Runner.prototype = {
     },
     resetHealth() {
         const healthEl = document.getElementById('health');
-        healthEl.style.background = 'green';
-        this.health = 100;
-        healthEl.style.width = this.health + '%';
+        if(healthEl) {
+            healthEl.style.background = 'green';
+            this.health = 100;
+            healthEl.style.width = this.health + '%';
+        }
     },
     updateHealth() {
         const healthEl = document.getElementById('health');
-        this.health -= 1;
-        healthEl.style.width = this.health + '%';
-        if(this.health < 80) {
-            healthEl.style.background = 'greenyellow';
-        }
-        if(this.health < 60) {
-            healthEl.style.background = 'rgb(255, 215, 0)';
-        }
-        if(this.health < 30) {
-            healthEl.style.background = 'red';
+        if(healthEl) {
+            this.health -= 1;
+            healthEl.style.width = this.health + '%';
+            if(this.health < 80) {
+                healthEl.style.background = 'greenyellow';
+            }
+            if(this.health < 60) {
+                healthEl.style.background = 'rgb(255, 215, 0)';
+            }
+            if(this.health < 30) {
+                healthEl.style.background = 'red';
+            }
         }
     },
 

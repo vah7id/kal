@@ -2,6 +2,7 @@
   "name": "kal",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://vah7id.github.io/kal",
   "dependencies": {
     "@types/history": "^4.7.3",
     "@types/jest": "24.0.18",
@@ -11,8 +12,10 @@
     "@types/react-redux": "^7.1.2",
     "@types/react-router": "^5.0.5",
     "@types/simple-peer": "^6.1.6",
+    "add": "^2.0.6",
     "connected-react-router": "^6.5.2",
     "framer-motion": "^1.6.7",
+    "gh-pages": "^2.1.1",
     "history": "^4.10.1",
     "node-sass-chokidar": "^1.3.5",
     "peerjs": "^1.1.0",
@@ -24,13 +27,16 @@
     "redux-persist": "^6.0.0",
     "redux-saga": "^1.1.1",
     "simple-peer": "^9.6.0",
-    "typescript": "3.6.3"
+    "typescript": "3.6.3",
+    "yarn": "^1.19.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build",
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "yarn run build-css && node-sass-chokidar src/ -o src/ --watch --recursive"
   },

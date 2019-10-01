@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/kal/static/css/main.b08dbe0d.chunk.css",
-    "main.js": "/kal/static/js/main.65d5e83b.chunk.js",
-    "main.js.map": "/kal/static/js/main.65d5e83b.chunk.js.map",
+    "main.css": "/kal/static/css/main.64b065c1.chunk.css",
+    "main.js": "/kal/static/js/main.ebd82f49.chunk.js",
+    "main.js.map": "/kal/static/js/main.ebd82f49.chunk.js.map",
     "runtime~main.js": "/kal/static/js/runtime~main.98893dc1.js",
     "runtime~main.js.map": "/kal/static/js/runtime~main.98893dc1.js.map",
-    "static/js/2.9f600356.chunk.js": "/kal/static/js/2.9f600356.chunk.js",
-    "static/js/2.9f600356.chunk.js.map": "/kal/static/js/2.9f600356.chunk.js.map",
+    "static/js/2.33196aab.chunk.js": "/kal/static/js/2.33196aab.chunk.js",
+    "static/js/2.33196aab.chunk.js.map": "/kal/static/js/2.33196aab.chunk.js.map",
     "index.html": "/kal/index.html",
-    "precache-manifest.230eda04dc4a6dd0b085ab9aae736813.js": "/kal/precache-manifest.230eda04dc4a6dd0b085ab9aae736813.js",
+    "precache-manifest.65f4c5d5e53af873741884ec35dc7197.js": "/kal/precache-manifest.65f4c5d5e53af873741884ec35dc7197.js",
     "service-worker.js": "/kal/service-worker.js",
-    "static/css/main.b08dbe0d.chunk.css.map": "/kal/static/css/main.b08dbe0d.chunk.css.map",
+    "static/css/main.64b065c1.chunk.css.map": "/kal/static/css/main.64b065c1.chunk.css.map",
     "static/media/_game.scss": "/kal/static/media/stone.599c58a9.png"
   }
 }

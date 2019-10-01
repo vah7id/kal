@@ -9,4 +9,15 @@
   #kick-off-start-msg {
     font-size: 0.35em;
   }
+  .screen--multiplayer h2, .screen--start h2 {
+    font-size: 1em;
+    line-height: 1em;
+  }
+  .screen--multiplayer ul li span{
+    font-size: $font-m;
+  }
+  .screen--multiplayer button {
+    font-size: $font-sm;
+    padding: 10px 20px;
+  }
 }

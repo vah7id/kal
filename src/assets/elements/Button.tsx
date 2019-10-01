@@ -34,15 +34,17 @@ class Button extends Component<Props, State> {
     }
     loadSound() {
         const audioEl = document.getElementById('offline-sound-press') as HTMLAudioElement;
-        let soundSrc: string = audioEl.src;
-        soundSrc = soundSrc.substr(soundSrc.indexOf(',') + 1);
-        const buffer = this.decodeBase64ToArrayBuffer(soundSrc);
-        let soundFx = this.state.soundFx;
-        // Async, so no guarantee of order in array.
-        if(this.state.audioContext) {
-            this.state.audioContext.decodeAudioData(buffer, function (index: string, audioData: any) {
-                soundFx[index] = audioData;
-            }.bind(this, 'offline-sound-press'));
+        if(audioEl) {
+            let soundSrc: string = audioEl.src;
+            soundSrc = soundSrc.substr(soundSrc.indexOf(',') + 1);
+            const buffer = this.decodeBase64ToArrayBuffer(soundSrc);
+            let soundFx = this.state.soundFx;
+            // Async, so no guarantee of order in array.
+            if (this.state.audioContext) {
+                this.state.audioContext.decodeAudioData(buffer, function (index: string, audioData: any) {
+                    soundFx[index] = audioData;
+                }.bind(this, 'offline-sound-press'));
+            }
         }
     }
     decodeBase64ToArrayBuffer(base64String: string) {

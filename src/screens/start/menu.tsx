@@ -47,7 +47,6 @@ class StartMenu extends Component<Props, any> {
     }
 }
 
-
 const mapStateToProps = (state: any) => ({
     status: state.game.status
 });

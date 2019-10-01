@@ -1,0 +1,49 @@
+@import 'basics/_variables.scss';
+
+.screen--multiplayer {
+  background: $blue;
+  text-align: center;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  button {
+    width: 80%;
+  }
+  h2 {
+    animation: blink 1s steps(3, start) infinite;
+    margin: 0 auto;
+    font-size: $font-lg;
+    width: 100%;
+    float: right;
+    color: white;
+    margin-bottom: 50px;
+  }
+  ul {
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
+    float: right;
+    display: flex;
+    margin-bottom: 25px;
+    li {
+      flex: 1;
+      span {
+        font-size: $font-xl;
+        color: yellow;
+        background: rgba(0,0,0,0.2);
+        text-align: center;
+        text-shadow: -4px 0 0 red,
+        -4px 0 0 yellow,
+        4px 0 0 purple,
+        6px 0 0 green;
+        cursor: pointer;
+      }
+    }
+  }
+}

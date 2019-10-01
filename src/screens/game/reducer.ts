@@ -6,8 +6,8 @@ const defaultState = {
 
 // types
 export const types = {
-  KICK_OFF: '@KAL_KICK_OFF',
-  PLAYING: '@KAL_PLAYING',
+  KICK_OFF: '@KAL/KICK_OFF',
+  PLAYING: '@KAL/PLAYING',
 };
 
 // actions

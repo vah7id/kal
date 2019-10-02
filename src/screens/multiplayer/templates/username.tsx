@@ -43,7 +43,7 @@ class UsernameScreen extends Component<UsernameProps, any> {
                 </ul>
                 <ul>
                     <li><Button onPress={() => this.props.setUsername('')} classList={'eightbit-btn eightbit-btn--reset'} id={'username-clear'} type={'error'} title={'CLEAR'}/></li>
-                    <li><Button onPress={() => this.props.username.length > 0 && this.props.navigate('lobby')} classList={'eightbit-btn'} id={'username-submit'} type={'success'} title={'START'}/></li>
+                    <li><Button onPress={() => this.props.username.length > 0 && this.props.navigate(`lobby/${Math.random().toString(36).substr(2, 4)}`)} classList={'eightbit-btn'} id={'username-submit'} type={'success'} title={'START'}/></li>
                 </ul>
             </>
         );

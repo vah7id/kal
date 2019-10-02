@@ -46,7 +46,7 @@ class KickOffScreen extends Component<KickOffProps, any> {
         return (
             <>
                 <div id={'kick-off-start-msg'}>
-                    <Button onPress={() => this.kickoff()} classList={'btn-light active'} type={'link'} title={'Press Space to start'} id={'sp-start-btn'} />
+                    <Button onPress={() => this.kickoff()} classList={'btn-light active'} type={'link'} title={'Press Here to start'} id={'sp-start-btn'} />
                 </div>
             </>
         );

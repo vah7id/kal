@@ -1,6 +1,7 @@
 import StartScreen from "./screens/start";
 import SinglePlayerScreen from "./screens/game";
 import MultiPlayerScreen from "./screens/multiplayer";
+import LobbyScreen from './screens/multiplayer/templates/lobby';
 
 const routes = [
   {
@@ -16,6 +17,11 @@ const routes = [
   {
     path: '/multi-player',
     component: MultiPlayerScreen,
+    exact: true,
+  },
+  {
+    path: '/lobby/:id',
+    component: LobbyScreen,
     exact: true,
   },
 ];

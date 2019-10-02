@@ -20,4 +20,10 @@
     font-size: $font-sm;
     padding: 10px 20px;
   }
+  .screen--lobby ul {
+    flex-direction: column-reverse;
+  }
+  .screen--lobby p {
+    font-size: 0.7em;
+  }
 }

@@ -75,6 +75,12 @@
   button {
     font-size: $font-lg;
     animation: blink 0.5s steps(3, start) infinite;
+    position: fixed;
+    width: 100%;
+    text-align: center;
+    right: 0;
+    top: 0;
+    height: 100%;
   }
 }
 

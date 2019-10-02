@@ -11,12 +11,44 @@ interface Props {
     status: string;
 }
 
-class StartMenu extends Component<Props, any> {
+interface State {
+    selected: string;
+}
+
+class StartMenu extends Component<Props, State> {
+    constructor(props: Props) {
+        super(props);
+        this.state = {
+            selected: 'single-player'
+        };
+    }
     componentDidMount() {
         if(this.props.status === GAME_STATUS.kickoff) {
             this.adjustMenuSize();
             this.initialMenu();
+            this.keyboardListener();
         }
+    }
+    componentWillUnmount() {
+        document.removeEventListener('keydown', this.keyboardListener, true);
+    }
+    keyboardListener() {
+        const list = ['single-player', 'multi-player', 'settings', 'guidance', 'credits'];
+        document.addEventListener('keydown', (e) => {
+            if(e.keyCode === 40 || e.keyCode === 38 || e.keyCode === 9) {
+                const idx = list.indexOf(this.state.selected);
+                const down = e.keyCode === 40 || e.keyCode === 9;
+                let nextIdx = down ? list[idx + 1] : list[idx - 1];
+                if (!nextIdx) {
+                    nextIdx = list[0];
+                }
+                const nextBtn = document.getElementById(nextIdx) as HTMLButtonElement;
+                if (nextBtn) {
+                    nextBtn.focus();
+                }
+                this.setState({selected: nextIdx});
+            }
+        });
     }
     adjustMenuSize() {
         const menu = document.querySelector('.screen--start ul') as HTMLElement;

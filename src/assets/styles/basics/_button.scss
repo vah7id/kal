@@ -120,3 +120,15 @@ button.active {
 
   }
 }
+
+.audio-asset-wrapper {
+  position: relative;
+}
+
+.btn-audio {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  right: 0;
+  opacity: 0;
+}

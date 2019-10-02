@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Button from '../../assets/elements/Button';
+import Audio from '../../assets/elements/Audio';
 import '../../assets/styles/_start.scss';
 import { push } from 'connected-react-router';
 import {GAME_STATUS} from "../game/types";

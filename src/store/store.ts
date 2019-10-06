@@ -12,7 +12,7 @@ export const configureStore = (history: any) => {
   const persistedReducer = persistReducer(
     {
       key: 'root',
-      version: 2,
+      version: 3,
       blacklist: ['router', 'game'],
       storage,
     },

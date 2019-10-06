@@ -13,6 +13,7 @@
     "@types/react-router": "^5.0.5",
     "@types/simple-peer": "^6.1.6",
     "add": "^2.0.6",
+    "colyseus.js": "^0.11.2",
     "connected-react-router": "^6.5.2",
     "framer-motion": "^1.6.7",
     "gh-pages": "^2.1.1",
@@ -28,6 +29,7 @@
     "redux-saga": "^1.1.1",
     "simple-peer": "^9.6.0",
     "typescript": "3.6.3",
+    "websocket": "^1.0.30",
     "yarn": "^1.19.0"
   },
   "scripts": {

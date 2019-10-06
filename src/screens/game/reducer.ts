@@ -21,10 +21,12 @@ export const gameReducer = (state = defaultState, action: any) => {
   switch (action.type) {
     case types.KICK_OFF:
       return {
+        ...state,
         status: GAME_STATUS.kickoff
       };
     case types.PLAYING:
       return {
+        ...state,
         status: GAME_STATUS.playing
       };
     default:

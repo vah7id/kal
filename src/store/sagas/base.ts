@@ -1,31 +1,33 @@
-import { takeLatest } from 'redux-saga/effects';
-import SimplePeer from 'simple-peer';
+import { select, takeLatest } from 'redux-saga/effects';
+import { client } from '../../';
+import { LOCATION_CHANGE } from "connected-react-router";
+import { COMMANDS } from '../ducks/types';
+import { getUsername } from "../../screens/multiplayer/reducer";
+import { getUserId } from "../../screens/multiplayer/reducer";
 
-export function test() {
-    let peer1 = new SimplePeer({ initiator: true })
-    let peer2 = new SimplePeer()
-
-    peer1.on('signal', data => {
-      // when peer1 has signaling data, give it to peer2 somehow
-      peer2.signal(data)
-    })
-
-    peer2.on('signal', data => {
-      // when peer2 has signaling data, give it to peer1 somehow
-      peer1.signal(data)
-    })
-
-    peer1.on('connect', () => {
-      // wait for 'connect' event before using the data channel
-      peer1.send('hey peer2, how is it going?')
-    })
-
-    peer2.on('data', data => {
-      // got a data channel message
-      console.log('got a message from peer1: ' + data)
-    })
+function* init(action: any) {
+    const username = yield select(getUsername);
+    const _id = yield select(getUserId);
+    if(action.payload.isFirstRendering) {
+        client.onopen = () => {
+            const msg = {
+                cmd: COMMANDS.PLAYER_CONNECT,
+                data: { username: username,  id: _id }
+            };
+            client.send(JSON.stringify(msg));
+        };
+        client.onmessage = (msg: string) => {
+            console.log(msg)
+        }
+        client.onclose = () => {
+            console.log('lost connection')
+        }
+        client.onerror = () => {
+            console.log('error in connection')
+        }
+    }
 }
 
 export function* base() {
-  yield takeLatest('KICK_OFF', test);
+    yield takeLatest(LOCATION_CHANGE, init);
 }

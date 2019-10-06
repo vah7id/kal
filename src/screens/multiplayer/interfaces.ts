@@ -2,6 +2,8 @@
 
 export interface UsernameProps {
     username: string;
+    createGame: any;
+    updateGame: any;
     setUsername: any;
     navigate: any;
 }

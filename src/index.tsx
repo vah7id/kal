@@ -9,9 +9,9 @@ import { createHashHistory } from 'history'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-const WS = require('websocket').w3cwebsocket;
 const host = window.document.location.host.replace(/:.*/, '');
 const location = window.location;
+export const WS = require('websocket').w3cwebsocket;
 export const client = new WS('ws://localhost:8080/', 'echo-protocol', null, null, {});
 
 const history: any = createHashHistory({ hashType: 'slash', getUserConfirmation: (message, callback) => callback(window.confirm(message)) });

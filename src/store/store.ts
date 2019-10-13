@@ -13,7 +13,7 @@ export const configureStore = (history: any) => {
     {
       key: 'root',
       version: 3,
-      blacklist: ['router', 'game'],
+      blacklist: ['router', 'game', 'multiplayer'],
       storage,
     },
     rootReducer

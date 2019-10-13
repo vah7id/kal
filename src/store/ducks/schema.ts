@@ -1,9 +1,11 @@
+import {Player} from "../../screens/multiplayer/interfaces";
+
 export interface MultiPlayerStateTree {
     username: string;
     peer: any;
     id: string;
     create_at: string;
-    players: string[];
+    players: Array<Player>;
     sessionId: string;
     roomId: string;
     loggedInUserId: string;

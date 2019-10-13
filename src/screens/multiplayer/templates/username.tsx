@@ -5,8 +5,9 @@ import {actions, getUsername} from '../reducer';
 import Button from "../../../assets/elements/Button";
 import { MAX_USERNAME_LENGTH } from '../../../utils/global';
 import { push } from 'connected-react-router';
-import {client} from "../../../index";
-import {COMMANDS} from "../../../store/ducks/types";
+import { client } from "../../../index";
+import { COMMANDS } from "../../../store/ducks/types";
+import { sendMessage } from '../../../utils/client';
 
 class UsernameScreen extends Component<UsernameProps, any> {
     typeChar(char: string) {
@@ -28,14 +29,21 @@ class UsernameScreen extends Component<UsernameProps, any> {
         }
     }
     createGame() {
-        const gameId = Math.random().toString(36).substr(2, 4);
+        // load game id from qs or make new hash
+        let gameId = Math.random().toString(36).substr(2, 4);
+        let initiator = true;
+        if(window.location.hash.indexOf('lobby=') > -1) {
+            initiator = false;
+            gameId = window.location.hash.split('lobby=')[1];
+        }
         const userId = Math.random().toString(36).substr(2, 16);
-        client.send(JSON.stringify({
+        sendMessage(JSON.stringify({
             cmd: COMMANDS.GAME_CREATE,
             data: {
+                initiator,
                 username: this.props.username,
                 userId: this.props.username+userId,
-                _id: gameId
+                _id: gameId,
             }
         }));
         this.props.navigate(`lobby/${gameId}`);
@@ -73,7 +81,7 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-    createGame: (id: string) => dispatch(actions.createGame(id)),
+    createGame: (id: string, userid: string) => dispatch(actions.createGame(id, userid)),
     setUsername: (name: string) => dispatch(actions.setUsername(name)),
     navigate: (route: string) => dispatch(push(route)),
     updateGame: (room: any) => dispatch(actions.setGameId(room))

@@ -30,7 +30,7 @@
     "simple-peer": "^9.6.0",
     "typescript": "3.6.3",
     "websocket": "^1.0.30",
-    "yarn": "^1.19.0"
+    "yarn": "^1.22.0"
   },
   "scripts": {
     "start": "react-scripts start",
